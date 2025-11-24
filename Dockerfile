@@ -33,7 +33,7 @@ RUN echo "# */2 * * * * date >> /var/log/cron.log 2>&1" > /var/spool/cron/cronta
 # 这一步最关键！！！权限必须是 600 + root:root
 RUN chmod 600 /var/spool/cron/crontabs/root && \
     chown root:root /var/spool/cron/crontabs/root
-
+COPY crontab /app/crontab
 # 默认命令：启动 crond 并保持容器运行（你可以根据需要修改为运行特定脚本）
 # 注意：crond 需要在前台运行以保持容器活跃，通常结合 tail -f /dev/null 或其他方式
 ENTRYPOINT ["/entrypoint.sh"]
